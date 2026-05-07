@@ -11,4 +11,5 @@ export interface CreateUserBody {
   email: string;
   role: 'admin' | 'user';
   department?: string;
+  phone?: string;
 }
