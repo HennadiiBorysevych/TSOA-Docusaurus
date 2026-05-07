@@ -1,4 +1,4 @@
-name: Docs — TSOA
+name: Docs — TSOA + Docusaurus
 
 on:
   push:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +21,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: Install API dependencies
         run: npm install
 
       - name: Generate OpenAPI spec (TSOA)
@@ -28,8 +30,23 @@ jobs:
       - name: Validate spec
         run: npx @redocly/cli lint swagger.json --skip-rule=no-empty-servers
 
-      - name: Commit updated spec
+      - name: Commit updated swagger.json
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'docs: regenerate swagger spec'
           file_pattern: swagger.json
+
+      - name: Install Docusaurus dependencies
+        working-directory: website
+        run: npm install
+
+      - name: Build Docusaurus site
+        working-directory: website
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/build
+          publish_branch: gh-pages
