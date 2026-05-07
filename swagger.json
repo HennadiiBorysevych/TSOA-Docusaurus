@@ -59,6 +59,9 @@
 					},
 					"phone": {
 						"type": "string"
+					},
+					"notes": {
+						"type": "string"
 					}
 				},
 				"required": [
