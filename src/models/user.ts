@@ -15,4 +15,5 @@ export interface CreateUserBody {
   notes?: string;
   active?: boolean;
   avatar?: string;
+  timezone?: string;
 }

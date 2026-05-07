@@ -34,7 +34,7 @@ const config: Config = {
       items: [
         {
           label: 'API Reference',
-          to: '/api-reference',
+          to: '/api-reference/',
           position: 'left',
         },
         {
