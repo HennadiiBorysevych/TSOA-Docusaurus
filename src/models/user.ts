@@ -13,4 +13,5 @@ export interface CreateUserBody {
   department?: string;
   phone?: string;
   notes?: string;
+  active?: boolean;
 }
