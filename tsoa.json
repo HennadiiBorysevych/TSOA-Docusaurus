@@ -1,0 +1,15 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/controllers/**/*-controller.ts"],
+  "spec": {
+    "outputDirectory": ".",
+    "specVersion": 3,
+    "name": "TSOA Test API",
+    "version": "1.0.0",
+    "description": "Track 2 — TSOA + Scalar proof of concept"
+  },
+  "routes": {
+    "routesDir": "src/routes"
+  }
+}

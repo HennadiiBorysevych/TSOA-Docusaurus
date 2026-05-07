@@ -1,0 +1,35 @@
+name: Docs — TSOA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate OpenAPI spec (TSOA)
+        run: npm run docs:generate
+
+      - name: Validate spec
+        run: npx @redocly/cli lint swagger.json --skip-rule=no-empty-servers
+
+      - name: Commit updated spec
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'docs: regenerate swagger spec'
+          file_pattern: swagger.json
