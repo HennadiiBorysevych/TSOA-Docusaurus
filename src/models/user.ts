@@ -14,4 +14,5 @@ export interface CreateUserBody {
   phone?: string;
   notes?: string;
   active?: boolean;
+  avatar?: string;
 }
