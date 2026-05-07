@@ -68,6 +68,9 @@
 					},
 					"avatar": {
 						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
 					}
 				},
 				"required": [
