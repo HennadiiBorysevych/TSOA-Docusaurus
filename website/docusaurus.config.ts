@@ -1,6 +1,22 @@
-import type { Config } from '@docusaurus/types';
+import type { Config, Plugin } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import type { PluginOptions } from 'docusaurus-plugin-openapi-docs';
+
+// postman-code-generators (pulled in by docusaurus-theme-openapi-docs) uses
+// Node.js `path` internally. Webpack 5 no longer polyfills it, so we tell
+// webpack to ignore it for the browser bundle.
+function webpackFallbackPlugin(): Plugin {
+  return {
+    name: 'webpack-fallback',
+    configureWebpack() {
+      return {
+        resolve: {
+          fallback: { path: false },
+        },
+      };
+    },
+  };
+}
 
 const config: Config = {
   title: 'TSOA API Docs',
@@ -31,6 +47,7 @@ const config: Config = {
   ],
 
   plugins: [
+    webpackFallbackPlugin,
     [
       'docusaurus-plugin-openapi-docs',
       {
