@@ -18,11 +18,14 @@ const users: User[] = [];
 @Route('users')
 @Tags('Users')
 export class UsersController extends Controller {
+  /** List all users */
   @Get('/')
+  @Response(400, 'Bad request')
   public async listUsers(): Promise<User[]> {
     return users;
   }
 
+  /** Get a user by ID */
   @Get('{id}')
   @Response(404, 'User not found')
   public async getUser(@Path() id: string): Promise<User> {
@@ -34,8 +37,10 @@ export class UsersController extends Controller {
     return user;
   }
 
+  /** Create a user */
   @Post('/')
   @SuccessResponse(201, 'Created')
+  @Response(400, 'Bad request')
   public async createUser(@Body() body: CreateUserBody): Promise<User> {
     const user: User = {
       id: randomUUID(),
@@ -49,6 +54,7 @@ export class UsersController extends Controller {
     return user;
   }
 
+  /** Delete a user */
   @Delete('{id}')
   @SuccessResponse(204, 'Deleted')
   @Response(404, 'User not found')

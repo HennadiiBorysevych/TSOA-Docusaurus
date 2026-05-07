@@ -53,6 +53,9 @@
 							"admin",
 							"user"
 						]
+					},
+					"department": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -89,8 +92,12 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad request"
 					}
 				},
+				"description": "List all users",
 				"tags": [
 					"Users"
 				],
@@ -109,8 +116,12 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad request"
 					}
 				},
+				"description": "Create a user",
 				"tags": [
 					"Users"
 				],
@@ -146,6 +157,7 @@
 						"description": "User not found"
 					}
 				},
+				"description": "Get a user by ID",
 				"tags": [
 					"Users"
 				],
@@ -171,6 +183,7 @@
 						"description": "User not found"
 					}
 				},
+				"description": "Delete a user",
 				"tags": [
 					"Users"
 				],

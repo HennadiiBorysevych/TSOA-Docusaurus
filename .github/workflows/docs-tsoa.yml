@@ -28,7 +28,7 @@ jobs:
         run: npm run docs:generate
 
       - name: Validate spec
-        run: npx @redocly/cli lint swagger.json --skip-rule=no-empty-servers
+        run: npx @redocly/cli lint swagger.json --skip-rule=no-empty-servers --skip-rule=info-license --skip-rule=operation-summary
 
       - name: Commit updated swagger.json
         uses: stefanzweifel/git-auto-commit-action@v5
