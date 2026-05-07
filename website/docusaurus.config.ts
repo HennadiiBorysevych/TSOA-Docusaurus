@@ -1,22 +1,5 @@
-import type { Config, Plugin } from '@docusaurus/types';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import type { PluginOptions } from 'docusaurus-plugin-openapi-docs';
-
-// postman-code-generators (pulled in by docusaurus-theme-openapi-docs) uses
-// Node.js `path` internally. Webpack 5 no longer polyfills it, so we tell
-// webpack to ignore it for the browser bundle.
-function webpackFallbackPlugin(): Plugin {
-  return {
-    name: 'webpack-fallback',
-    configureWebpack() {
-      return {
-        resolve: {
-          fallback: { path: false },
-        },
-      };
-    },
-  };
-}
 
 const config: Config = {
   title: 'TSOA API Docs',
@@ -36,7 +19,6 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
-          docItemComponent: '@theme/ApiItem',
         },
         blog: false,
         theme: {
@@ -46,27 +28,23 @@ const config: Config = {
     ],
   ],
 
-  plugins: [
-    webpackFallbackPlugin,
-    [
-      'docusaurus-plugin-openapi-docs',
-      {
-        id: 'api',
-        docsPluginId: 'classic',
-        config: {
-          users: {
-            specPath: '../swagger.json',
-            outputDir: 'docs/api',
-            sidebarOptions: {
-              groupPathsBy: 'tag',
-            },
-          },
+  themeConfig: {
+    navbar: {
+      title: 'TSOA API Docs',
+      items: [
+        {
+          label: 'API Reference',
+          to: '/api-reference',
+          position: 'left',
         },
-      } satisfies PluginOptions,
-    ],
-  ],
-
-  themes: ['docusaurus-theme-openapi-docs'],
+        {
+          href: 'https://github.com/HennadiiBorysevych/TSOA-Docusaurus',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
+    },
+  } satisfies Preset.ThemeConfig,
 };
 
 export default config;

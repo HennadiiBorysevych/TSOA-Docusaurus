@@ -6,4 +6,6 @@ slug: /
 
 API documentation is auto-generated from the TSOA controllers on every push to `main`.
 
-Select an endpoint from the sidebar to explore the API.
+👉 [Open interactive API Reference →](/TSOA-Docusaurus/api-reference)
+
+The spec file is always up to date: [swagger.json](https://raw.githubusercontent.com/HennadiiBorysevych/TSOA-Docusaurus/main/swagger.json)
